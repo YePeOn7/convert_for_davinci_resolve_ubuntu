@@ -21,16 +21,15 @@ if [ $VIDEO_CODEC != copy ]; then
     OUTPUT_FILE=transcoded/${i%.*}_${VIDEO_CODEC}.mov
 	    if [ ! -f "$OUTPUT_FILE" ];then
             echo "ffmpeg -i \"$i\" -c:v ${VIDEO_CODEC} -rc vbr_hq -cq ${QUALITY} -c:a ${AUDIO_CODEC} \"$OUTPUT_FILE\""
-            #ffmpeg -i "${i}" -c:v ${VIDEO_CODEC} -rc vbr_hq -cq ${QUALITY} -c:a ${AUDIO_CODEC} "transcoded/${i%.*}_${VIDEO_CODEC}.mov"
+            ffm.conpeg -i \"$i\" -c:v ${VIDEO_CODEC} -rc vbr_hq -cq ${QUALITY} -c:a ${AUDIO_CODEC} "$OUTPUT_FILE"
         fi
     done
 else
     for i in *.mp4; do
         OUTPUT_FILE=transcoded/${i%.*}_${VIDEO_CODEC}.mov
 	    if [ ! -f "$OUTPUT_FILE" ]; then
-            # echo "ffmpeg -i \"$i\" -c:v copy -c:a ${AUDIO_CODEC} \'transcoded/${i%.*}_${VIDEO_CODEC}.mov\'"
             echo "ffmpeg -i \"$i\" -c:v copy -c:a ${AUDIO_CODEC} \"$OUTPUT_FILE\""
-            #ffmpeg -i "${i}" -c:v copy -c:a ${AUDIO_CODEC} "transcoded/${i%.*}_${VIDEO_CODEC}.mov"
+            ffmpeg -i "$i" -c:v copy -c:a ${AUDIO_CODEC} "$OUTPUT_FILE"
         fi
     done
 fi
